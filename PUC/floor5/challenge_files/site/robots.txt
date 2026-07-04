@@ -1,2 +1,0 @@
-User-agent: *
-Disallow: /maintenance_locker_5F/
