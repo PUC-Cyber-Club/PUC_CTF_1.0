@@ -1,0 +1,3 @@
+[submodule "PUC CTF/CTFd"]
+	path = PUC CTF/CTFd
+	url = https://github.com/CTFd/CTFd.git

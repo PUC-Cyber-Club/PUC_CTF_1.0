@@ -1,0 +1,181 @@
+:root {
+  --bg: #0a0a08;
+  --panel: #111108;
+  --amber: #ffb000;
+  --amber-dim: #8a6300;
+  --moss: #5a6650;
+  --alert: #ff3b30;
+  --line: #2a2a1e;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--amber);
+  font-family: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* CRT scanline overlay — the signature element */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 176, 0, 0.035) 0px,
+    rgba(255, 176, 0, 0.035) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  z-index: 5;
+}
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.55) 100%);
+  z-index: 6;
+  animation: flicker 6s infinite;
+}
+@keyframes flicker {
+  0%, 92%, 100% { opacity: 1; }
+  93% { opacity: 0.85; }
+  94% { opacity: 1; }
+}
+
+.terminal {
+  width: min(560px, 92vw);
+  border: 1px solid var(--line);
+  background: var(--panel);
+  box-shadow: 0 0 40px rgba(255, 176, 0, 0.06);
+  position: relative;
+  z-index: 1;
+}
+
+.alert-bar {
+  background: rgba(255, 59, 48, 0.1);
+  border-bottom: 1px solid var(--alert);
+  color: var(--alert);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-transform: uppercase;
+}
+.alert-bar .glyph { animation: pulse 1.6s ease-in-out infinite; }
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+.header {
+  padding: 18px 20px 0;
+  font-size: 13px;
+  color: var(--moss);
+  letter-spacing: 0.08em;
+}
+.header .title {
+  color: var(--amber);
+  font-size: 18px;
+  display: block;
+  margin-top: 4px;
+  letter-spacing: 0.02em;
+}
+
+.body {
+  padding: 20px;
+}
+
+.prompt-line {
+  font-size: 13px;
+  color: var(--moss);
+  margin-bottom: 18px;
+  line-height: 1.6;
+}
+
+label {
+  display: block;
+  font-size: 12px;
+  color: var(--moss);
+  margin-bottom: 6px;
+  letter-spacing: 0.08em;
+}
+
+.field {
+  margin-bottom: 16px;
+}
+
+input[type="text"], input[type="password"] {
+  width: 100%;
+  background: #000;
+  border: 1px solid var(--line);
+  color: var(--amber);
+  font-family: inherit;
+  font-size: 14px;
+  padding: 10px 12px;
+  outline: none;
+}
+input[type="text"]:focus, input[type="password"]:focus {
+  border-color: var(--amber-dim);
+}
+
+button {
+  width: 100%;
+  background: var(--amber);
+  color: #000;
+  border: none;
+  font-family: inherit;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 12px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+button:hover { background: #ffc940; }
+button:focus-visible { outline: 2px solid var(--alert); outline-offset: 2px; }
+
+.error {
+  color: var(--alert);
+  font-size: 13px;
+  margin-bottom: 14px;
+}
+
+.footer-note {
+  border-top: 1px solid var(--line);
+  padding: 12px 20px;
+  font-size: 11px;
+  color: var(--moss);
+  letter-spacing: 0.05em;
+}
+
+.flag-box {
+  margin-top: 16px;
+  border: 1px solid var(--amber-dim);
+  background: #000;
+  color: var(--amber);
+  padding: 14px;
+  font-size: 14px;
+  word-break: break-all;
+}
+
+.cursor::after {
+  content: "_";
+  animation: blink 1s steps(1) infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  body::after, .alert-bar .glyph, .cursor::after { animation: none; }
+}

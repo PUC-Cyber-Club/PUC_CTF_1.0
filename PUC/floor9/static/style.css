@@ -1,0 +1,115 @@
+/* ============================================================
+   PUC INTRA CTF — ZOMBIE OUTBREAK / FLOOR ESCAPE
+   Floor 9 · Biotech Lab & Server Room (Web Exploitation)
+   Unified "Outbreak Containment" theme
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=JetBrains+Mono:wght@400;700&display=swap');
+
+:root{
+  --bg:#0a0708; --panel:#15100f; --concrete:#211a18;
+  --blood:#c1150e; --blood-2:#e51d18; --blood-dim:#5c0a07;
+  --bone:#ece6dc; --bone-dim:#9a938a; --ash:#6f6863;
+  --line:#2c2421; --alert:#e51d18;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --disp:"Oswald",system-ui,"Segoe UI",Roboto,sans-serif;
+}
+*{box-sizing:border-box;}
+
+body{
+  margin:0;min-height:100vh;background:var(--bg);color:var(--bone);
+  font-family:var(--mono);display:flex;align-items:center;justify-content:center;
+  padding:24px;position:relative;overflow-x:hidden;
+}
+/* layered background: blood glow + tactical map grid + vignette */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(800px 500px at 80% -10%, rgba(193,21,14,.18), transparent 60%),
+    radial-gradient(600px 400px at 10% 110%, rgba(193,21,14,.10), transparent 60%),
+    linear-gradient(transparent 0 39px, rgba(255,255,255,.025) 39px 40px),
+    linear-gradient(90deg, transparent 0 39px, rgba(255,255,255,.025) 39px 40px);
+  background-size:auto,auto,40px 40px,40px 40px;
+}
+/* CRT scanlines + flicker vignette */
+body::after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:50;
+  background:
+    repeating-linear-gradient(to bottom, rgba(0,0,0,.18) 0 1px, transparent 1px 3px),
+    radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,.6) 100%);
+  animation:flicker 7s infinite;
+}
+@keyframes flicker{0%,92%,100%{opacity:1;}93%{opacity:.9;}94%{opacity:1;}}
+
+.terminal{
+  width:min(580px,94vw);position:relative;z-index:1;
+  background:linear-gradient(180deg,var(--panel),#100b0a);
+  border:1px solid var(--line);border-left:3px solid var(--blood);
+  box-shadow:0 24px 60px rgba(0,0,0,.6), 0 0 60px rgba(193,21,14,.08);
+}
+/* shared CTF brand strip injected on every page */
+.terminal::before{
+  content:"\2623  PUC INTRA CTF  \00b7  ZOMBIE OUTBREAK \2014 FLOOR ESCAPE";
+  display:block;font-family:var(--disp);font-weight:700;letter-spacing:.14em;
+  font-size:11px;text-transform:uppercase;color:var(--bone);
+  background:repeating-linear-gradient(45deg,var(--blood) 0 12px,#a91109 12px 24px);
+  padding:7px 16px;border-bottom:1px solid #000;
+  text-shadow:0 1px 2px rgba(0,0,0,.6);
+}
+
+.alert-bar{
+  background:rgba(229,29,24,.12);border-bottom:1px solid var(--alert);
+  color:var(--alert);font-family:var(--disp);font-weight:600;
+  font-size:13px;letter-spacing:.16em;padding:9px 16px;
+  display:flex;align-items:center;justify-content:space-between;text-transform:uppercase;
+}
+.alert-bar .glyph{animation:pulse 1.5s ease-in-out infinite;font-size:16px;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+
+.header{padding:20px 20px 0;font-size:12px;color:var(--ash);letter-spacing:.1em;font-family:var(--disp);}
+.header .title{
+  color:var(--bone);font-family:var(--disp);font-weight:700;font-size:24px;
+  display:block;margin-top:6px;letter-spacing:.04em;text-transform:uppercase;
+  border-bottom:2px solid var(--blood);padding-bottom:10px;
+}
+.body{padding:20px;}
+.prompt-line{font-size:13px;color:var(--bone-dim);margin-bottom:20px;line-height:1.7;}
+
+label{display:block;font-size:11px;color:var(--bone-dim);margin-bottom:6px;letter-spacing:.12em;text-transform:uppercase;}
+.field{margin-bottom:16px;}
+input[type="text"],input[type="password"]{
+  width:100%;background:#000;border:1px solid var(--line);color:var(--bone);
+  font-family:var(--mono);font-size:14px;padding:11px 13px;outline:none;transition:border-color .15s;
+}
+input:focus{border-color:var(--blood);box-shadow:0 0 0 1px rgba(193,21,14,.4);}
+
+button{
+  width:100%;background:var(--blood);color:var(--bone);border:none;
+  font-family:var(--disp);font-weight:700;letter-spacing:.14em;font-size:14px;
+  padding:13px;cursor:pointer;text-transform:uppercase;transition:background .15s;
+}
+button:hover{background:var(--blood-2);}
+button:focus-visible{outline:2px solid var(--bone);outline-offset:2px;}
+
+.error{color:var(--alert);font-size:13px;margin-bottom:14px;font-weight:700;}
+
+.footer-note{
+  border-top:1px solid var(--line);padding:12px 20px;font-size:10px;
+  color:var(--ash);letter-spacing:.1em;text-transform:uppercase;
+}
+
+/* flag display — mirrors the banner's bordered mono flag box */
+.flag-box{
+  margin-top:18px;border:2px solid var(--bone);background:#000;color:var(--bone);
+  padding:16px;font-family:var(--mono);font-size:15px;word-break:break-all;position:relative;
+}
+.flag-box::before{
+  content:"\1F512  FLAG";position:absolute;top:-10px;left:12px;background:var(--bg);
+  padding:0 8px;font-family:var(--disp);font-size:10px;letter-spacing:.16em;color:var(--bone-dim);
+}
+
+.cursor::after{content:"_";animation:blink 1s steps(1) infinite;}
+@keyframes blink{50%{opacity:0;}}
+
+@media (prefers-reduced-motion:reduce){
+  body::after,.alert-bar .glyph,.cursor::after{animation:none;}
+}

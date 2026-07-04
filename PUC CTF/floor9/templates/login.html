@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Biotech Research Portal — Node 9F</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <!--
+    TODO: remove before deploy. Antidote fragment: PUCTF{f9_r3s1du4l_s3ss10n_n0t3}
+    Note to self: Dr. Rahman's encrypted notes use shift key = 7. Door override creds still default.
+  -->
+
+  <div class="terminal">
+    <div class="alert-bar">
+      <span>CONTAINMENT BREACH — LVL 9</span>
+      <span class="glyph">☣</span>
+    </div>
+    <div class="header">
+      NODE 9F / SERVER ROOM
+      <span class="title">BIOTECH RESEARCH PORTAL</span>
+    </div>
+    <div class="body">
+      <div class="prompt-line">
+        > session restored from last known state.<br>
+        > authenticate to proceed<span class="cursor"></span>
+      </div>
+
+      {% if error %}
+        <div class="error">!! {{ error }}</div>
+      {% endif %}
+
+      <form method="POST" action="{{ url_for('login') }}" autocomplete="off">
+        <div class="field">
+          <label for="username">username</label>
+          <input type="text" id="username" name="username" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="password">password</label>
+          <input type="password" id="password" name="password" autocomplete="off">
+        </div>
+        <button type="submit">authenticate</button>
+      </form>
+    </div>
+    <div class="footer-note">PUC-BIOTECH-9F · ACCESS LOG ACTIVE · ALL ATTEMPTS RECORDED</div>
+  </div>
+
+</body>
+</html>

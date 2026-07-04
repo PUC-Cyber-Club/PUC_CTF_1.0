@@ -1,0 +1,114 @@
+:root {
+  --bg: #e9edf1;
+  --navy: #1c2b3a;
+  --accent: #2f6fed;
+  --red: #c23030;
+  --line: #c7d0d9;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--navy);
+  font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.card {
+  width: min(480px, 100%);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(28, 43, 58, 0.08);
+}
+
+.bar {
+  background: var(--navy);
+  color: #fff;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  padding: 10px 18px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+h2 {
+  margin: 18px 18px 4px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.status {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  background: rgba(194, 48, 48, 0.12);
+  color: var(--red);
+  border: 1px solid rgba(194, 48, 48, 0.35);
+  border-radius: 3px;
+  padding: 3px 8px;
+}
+
+.meta {
+  margin: 0 18px 12px;
+  font-size: 12px;
+  color: #5a6b7a;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.bio {
+  margin: 0 18px 16px;
+  font-size: 14px;
+  line-height: 1.6;
+  background: #f5f7fa;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 12px 14px;
+}
+
+.photo {
+  width: calc(100% - 36px);
+  margin: 0 18px 8px;
+  display: block;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+.caption {
+  margin: 0 18px 18px;
+  font-size: 11px;
+  color: #5a6b7a;
+}
+
+.status.ok {
+  background: rgba(46, 139, 87, 0.12);
+  color: #2e8b57;
+  border-color: rgba(46, 139, 87, 0.35);
+}
+
+.card.wide { width: min(620px, 100%); }
+
+.loc-table {
+  width: calc(100% - 36px);
+  margin: 0 18px 16px;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.loc-table th, .loc-table td {
+  border: 1px solid var(--line);
+  padding: 8px 10px;
+  text-align: left;
+}
+.loc-table th {
+  background: #f5f7fa;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: #5a6b7a;
+}

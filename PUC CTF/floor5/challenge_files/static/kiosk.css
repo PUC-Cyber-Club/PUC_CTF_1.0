@@ -1,0 +1,88 @@
+:root {
+  --bg: #080a06;
+  --panel: #0d0f0b;
+  --green: #39ff14;
+  --green-dim: #1c8a00;
+  --moss: #3a5230;
+  --alert: #ff3b30;
+  --line: #1a2a14;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--green);
+  font-family: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular,
+               Menlo, Consolas, monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(57, 255, 20, 0.03) 0px,
+    rgba(57, 255, 20, 0.03) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  z-index: 5;
+}
+
+.terminal {
+  width: min(560px, 92vw);
+  border: 1px solid var(--line);
+  background: var(--panel);
+  box-shadow: 0 0 48px rgba(57, 255, 20, 0.05);
+  position: relative;
+  z-index: 1;
+}
+
+.bar {
+  background: rgba(57, 255, 20, 0.07);
+  border-bottom: 1px solid var(--line);
+  color: var(--green-dim);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  padding: 8px 16px;
+  text-transform: uppercase;
+}
+
+h2 {
+  margin: 18px 20px 4px;
+  font-size: 17px;
+  letter-spacing: 0.02em;
+  color: var(--green);
+}
+
+.sub {
+  margin: 0 20px 16px;
+  font-size: 11px;
+  color: var(--moss);
+  letter-spacing: 0.06em;
+}
+
+.status-block {
+  margin: 0 20px 20px;
+  border: 1px solid var(--line);
+  background: #000;
+  padding: 14px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--green);
+}
+
+.status-block p { margin: 0 0 4px; }
+.status-block pre { margin: 0; white-space: pre-wrap; font-family: inherit; }
+
+.on  { color: var(--green); }
+.dim { color: var(--moss); font-size: 11px; }

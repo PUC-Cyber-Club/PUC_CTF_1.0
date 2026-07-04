@@ -1,0 +1,83 @@
+/* ============================================================
+   PUC INTRA CTF — ZOMBIE OUTBREAK / FLOOR ESCAPE
+   Floor 5 · Main Lobby / Exit (Misc / Systems — Final Floor)
+   Unified "Outbreak Containment" theme
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=JetBrains+Mono:wght@400;700&display=swap');
+
+:root{
+  --bg:#0a0708; --panel:#15100f; --concrete:#211a18;
+  --blood:#c1150e; --blood-2:#e51d18; --blood-dim:#5c0a07;
+  --bone:#ece6dc; --bone-dim:#9a938a; --ash:#6f6863;
+  --line:#2c2421; --ok:#3f9d62;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --disp:"Oswald",system-ui,"Segoe UI",Roboto,sans-serif;
+}
+*{box-sizing:border-box;}
+
+body{
+  margin:0;min-height:100vh;background:var(--bg);color:var(--bone);
+  font-family:var(--mono);display:flex;align-items:center;justify-content:center;
+  padding:24px;position:relative;overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(800px 500px at 80% -10%, rgba(193,21,14,.18), transparent 60%),
+    radial-gradient(600px 400px at 10% 110%, rgba(193,21,14,.10), transparent 60%),
+    linear-gradient(transparent 0 39px, rgba(255,255,255,.025) 39px 40px),
+    linear-gradient(90deg, transparent 0 39px, rgba(255,255,255,.025) 39px 40px);
+  background-size:auto,auto,40px 40px,40px 40px;
+}
+body::after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:50;
+  background:
+    repeating-linear-gradient(to bottom, rgba(0,0,0,.18) 0 1px, transparent 1px 3px),
+    radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,.6) 100%);
+  animation:flicker 7s infinite;
+}
+@keyframes flicker{0%,92%,100%{opacity:1;}93%{opacity:.9;}94%{opacity:1;}}
+
+.terminal{
+  width:min(600px,94vw);position:relative;z-index:1;
+  background:linear-gradient(180deg,var(--panel),#100b0a);
+  border:1px solid var(--line);border-left:3px solid var(--blood);
+  box-shadow:0 24px 60px rgba(0,0,0,.6), 0 0 60px rgba(193,21,14,.08);
+}
+/* shared CTF brand strip injected on every page */
+.terminal::before{
+  content:"\2623  PUC INTRA CTF  \00b7  ZOMBIE OUTBREAK \2014 FLOOR ESCAPE";
+  display:block;font-family:var(--disp);font-weight:700;letter-spacing:.14em;
+  font-size:11px;text-transform:uppercase;color:var(--bone);
+  background:repeating-linear-gradient(45deg,var(--blood) 0 12px,#a91109 12px 24px);
+  padding:7px 16px;border-bottom:1px solid #000;text-shadow:0 1px 2px rgba(0,0,0,.6);
+}
+
+/* page sub-bar (kept from original markup) */
+.bar{
+  background:rgba(229,29,24,.10);border-bottom:1px solid var(--line);
+  color:var(--blood-2);font-family:var(--disp);font-weight:600;font-size:12px;
+  letter-spacing:.14em;padding:9px 18px;text-transform:uppercase;
+}
+
+h2{
+  margin:20px 20px 4px;font-family:var(--disp);font-weight:700;font-size:24px;
+  letter-spacing:.03em;color:var(--bone);text-transform:uppercase;
+}
+.sub{margin:0 20px 18px;font-size:12px;color:var(--ash);letter-spacing:.08em;}
+
+.status-block{
+  margin:0 20px 22px;border:1px solid var(--line);border-left:2px solid var(--blood-dim);
+  background:#000;padding:16px;font-size:13px;line-height:1.8;color:var(--bone);
+}
+.status-block p{margin:0 0 4px;}
+.status-block pre{
+  margin:0;white-space:pre-wrap;font-family:var(--mono);color:var(--bone-dim);
+}
+/* highlight the embedded flag line (first line of locker notes) */
+.status-block pre{position:relative;}
+
+.on{color:var(--ok);font-weight:700;}
+.dim{color:var(--ash);font-size:11px;}
+
+@media (prefers-reduced-motion:reduce){body::after{animation:none;}}
